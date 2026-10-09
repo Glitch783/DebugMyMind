@@ -1,0 +1,122 @@
+[
+  {
+    "student_id": "S1001",
+    "student_name": "Alice Smith",
+    "code": "def add_item(item, lst=[]):\n    lst.append(item)\n    return lst\n\nprint(add_item(1))\nprint(add_item(2))",
+    "error_trace": "Stdout: [1]\n[1, 2]\nStderr: None\nTraceback: None",
+    "misconception_id": "mutable_default_argument",
+    "misconception_name": "Mutable Default Argument",
+    "confidence": 0.95,
+    "explanation": "You used a mutable list `[]` as a default parameter value. In Python, default arguments are evaluated once when the function is defined, not on every call, meaning the exact same list is reused across function calls.",
+    "exercise": "Rewrite the function `add_item(item, lst=None)` so that it initializes a new list `[]` inside the function if `lst` is `None`.",
+    "timestamp": "2026-06-09T09:00:00"
+  },
+  {
+    "student_id": "S1002",
+    "student_name": "Bob Jones",
+    "code": "def get_last_three(lst):\n    # Accessing elements out of range\n    elements = []\n    for i in range(len(lst) - 2, len(lst) + 1):\n        elements.append(lst[i])\n    return elements\n\nprint(get_last_three([10, 20, 30, 40]))",
+    "error_trace": "Traceback (most recent call last):\n  File \"student_code.py\", line 7, in <module>\n    print(get_last_three([10, 20, 30, 40]))\n  File \"student_code.py\", line 5, in get_last_three\n    elements.append(lst[i])\nIndexError: list index out of range",
+    "misconception_id": "off_by_one",
+    "misconception_name": "Off-by-One Error",
+    "confidence": 0.88,
+    "explanation": "Your loop index goes up to `len(lst)`, which attempts to access `lst[len(lst)]`. Remember that list indices in Python start at 0 and end at `len(lst) - 1`.",
+    "exercise": "Correct the range in `get_last_three` so it doesn't go beyond the final index of the list.",
+    "timestamp": "2026-06-09T09:15:00"
+  },
+  {
+    "student_id": "S1003",
+    "student_name": "Charlie Brown",
+    "code": "def calculate_square(x):\n    square = x * x\n    # forgot return\n\nresult = calculate_square(5)\nprint(result + 10)",
+    "error_trace": "Traceback (most recent call last):\n  File \"student_code.py\", line 6, in <module>\n    print(result + 10)\nTypeError: unsupported operand type(s) for +: 'NoneType' and 'int'",
+    "misconception_id": "missing_return_statement",
+    "misconception_name": "Missing Return Statement",
+    "confidence": 0.92,
+    "explanation": "Your function `calculate_square` calculates the square but does not return it. In Python, functions without an explicit `return` statement return `None` by default, which causes errors when you try to use the result.",
+    "exercise": "Add a `return` statement at the end of the `calculate_square` function to return the `square` variable.",
+    "timestamp": "2026-06-09T09:30:00"
+  },
+  {
+    "student_id": "S1004",
+    "student_name": "Diana Prince",
+    "code": "def compute_sum(lst):\n    for num in lst:\n        total = 0\n        total += num\n    return total\n\nprint(compute_sum([1, 2, 3, 4]))",
+    "error_trace": "Stdout: 4\nStderr: None\nTraceback: None",
+    "misconception_id": "loop_invariant_error",
+    "misconception_name": "Loop Invariant Error",
+    "confidence": 0.86,
+    "explanation": "You initialized the `total` variable inside the loop body. This resets the total back to 0 on every iteration, so your function only returns the value of the last item in the list.",
+    "exercise": "Move the initialization `total = 0` outside the loop, before the `for` statement starts.",
+    "timestamp": "2026-06-09T09:45:00"
+  },
+  {
+    "student_id": "S1005",
+    "student_name": "Ethan Hunt",
+    "code": "def sort_my_list(lst):\n    sorted_lst = lst.sort()\n    return sorted_lst\n\nprint(sort_my_list([3, 1, 2]) + [4])",
+    "error_trace": "Traceback (most recent call last):\n  File \"student_code.py\", line 5, in <module>\n    print(sort_my_list([3, 1, 2]) + [4])\nTypeError: unsupported operand type(s) for +: 'NoneType' and 'list'",
+    "misconception_id": "none_return_misunderstanding",
+    "misconception_name": "None Return Misunderstanding",
+    "confidence": 0.90,
+    "explanation": "You are assigning the result of `lst.sort()` to `sorted_lst`. The list `sort` method sorts the list in-place and returns `None`. To get a new sorted list, you should use the `sorted()` function or return the modified list.",
+    "exercise": "Change `lst.sort()` to either use `sorted(lst)` or sort the list in-place and then return `lst` on the next line.",
+    "timestamp": "2026-06-09T10:00:00"
+  },
+  {
+    "student_id": "S1001",
+    "student_name": "Alice Smith",
+    "code": "def calculate_average(nums):\n    total = 0\n    for n in nums:\n        total += n\n    # Missing return statement\n\navg = calculate_average([10, 20, 30])\nprint(avg / 3)",
+    "error_trace": "Traceback (most recent call last):\n  File \"student_code.py\", line 8, in <module>\n    print(avg / 3)\nTypeError: unsupported operand type(s) for /: 'NoneType' and 'int'",
+    "misconception_id": "missing_return_statement",
+    "misconception_name": "Missing Return Statement",
+    "confidence": 0.89,
+    "explanation": "Your function `calculate_average` calculates a total but fails to return anything, resulting in `None` when called. Thus, division fails.",
+    "exercise": "Add a return statement that returns the total divided by the length of the list.",
+    "timestamp": "2026-06-09T10:15:00"
+  },
+  {
+    "student_id": "S1002",
+    "student_name": "Bob Jones",
+    "code": "def get_usernames(users):\n    for u in users:\n        names = []\n        names.append(u['name'])\n    return names\n\nprint(get_usernames([{'name': 'Bob'}, {'name': 'Alice'}]))",
+    "error_trace": "Stdout: ['Alice']\nStderr: None\nTraceback: None",
+    "misconception_id": "loop_invariant_error",
+    "misconception_name": "Loop Invariant Error",
+    "confidence": 0.87,
+    "explanation": "You initialized the `names` list inside the loop body, which resets it back to an empty list on every iteration. Only the last user's name is retained.",
+    "exercise": "Initialize `names = []` outside the loop, prior to iterating over `users`.",
+    "timestamp": "2026-06-09T10:30:00"
+  },
+  {
+    "student_id": "S1006",
+    "student_name": "Fiona Gallagher",
+    "code": "def find_index(lst, val):\n    # Off by one: index out of bounds when loop goes to len(lst)\n    for i in range(len(lst) + 1):\n        if lst[i] == val:\n            return i\n    return -1\n\nprint(find_index([5, 6, 7], 8))",
+    "error_trace": "Traceback (most recent call last):\n  File \"student_code.py\", line 7, in <module>\n    print(find_index([5, 6, 7], 8))\n  File \"student_code.py\", line 4, in find_index\n    if lst[i] == val:\nIndexError: list index out of range",
+    "misconception_id": "off_by_one",
+    "misconception_name": "Off-by-One Error",
+    "confidence": 0.91,
+    "explanation": "The loop checks index up to `len(lst)` because of `range(len(lst) + 1)`. In Python, indices stop at `len(lst) - 1`.",
+    "exercise": "Modify the range to `range(len(lst))` to prevent an IndexError.",
+    "timestamp": "2026-06-09T10:45:00"
+  },
+  {
+    "student_id": "S1007",
+    "student_name": "George Weasley",
+    "code": "def add_prefix(prefix, names=[]):\n    for name in names:\n        print(prefix + name)\n    names.append(\"done\")\n    return names\n\nprint(add_prefix(\"Mr. \", [\"Potter\"]))\nprint(add_prefix(\"Ms. \"))\nprint(add_prefix(\"Dr. \"))",
+    "error_trace": "Stdout: Mr. Potter\nMs. done\nDr. done\ndone\nStderr: None\nTraceback: None",
+    "misconception_id": "mutable_default_argument",
+    "misconception_name": "Mutable Default Argument",
+    "confidence": 0.94,
+    "explanation": "The default argument `names=[]` persists. The string `\"done\"` is appended to it and persists into subsequent calls when no explicit list is provided.",
+    "exercise": "Use a default parameter of `names=None` and initialize `names = []` inside the function body.",
+    "timestamp": "2026-06-09T11:00:00"
+  },
+  {
+    "student_id": "S1001",
+    "student_name": "Alice Smith",
+    "code": "def build_greeting(name):\n    # Missing f prefix\n    return \"Hello, {name}!\"\n\nprint(build_greeting(\"Alice\"))",
+    "error_trace": "Stdout: Hello, {name}!\nStderr: None\nTraceback: None",
+    "misconception_id": "incorrect_string_formatting",
+    "misconception_name": "Incorrect String Formatting",
+    "confidence": 0.85,
+    "explanation": "You put curly braces `{name}` inside the string, but forgot the `f` prefix before the quotes. Without `f`, Python treats it as a literal string rather than interpolating the variable.",
+    "exercise": "Add an `f` right before the opening quote, like `f\"Hello, {name}!\"`.",
+    "timestamp": "2026-06-09T11:15:00"
+  }
+]
